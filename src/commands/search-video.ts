@@ -1,6 +1,6 @@
 import ytSearch from 'yt-search';
-import { SendMessage } from '@/types/socket-type';
-import { formatNumberWithDots, formatTime } from '@/utils';
+import { SendMessage } from '../types/socket-type';
+import { formatNumberWithDots, formatTime } from '../utils/index';
 
 export const searchVideoAndResponse = async (
   query: string,

@@ -21,5 +21,5 @@ export function formatTime(seconds: number): string {
 
 export function formatNumberWithDots(number: number): string {
   if (!number) return '0';
-  return number.toLocaleString('es'); // 'es' para el formato en español (con puntos)
+  return number.toLocaleString('es');
 }

@@ -1,5 +1,5 @@
-import { getVideoFile } from '@/libs/get-file';
-import { SendMessage } from '@/types/socket-type';
+import { getVideoFile } from '../libs/get-file';
+import { SendMessage } from '../types/socket-type';
 import { proto } from '@whiskeysockets/baileys';
 import { unlink } from 'fs';
 

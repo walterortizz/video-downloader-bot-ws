@@ -1,14 +1,11 @@
-import { formatTime } from '@/utils';
+import { formatTime } from '../utils/index';
 import ytdl from '@distube/ytdl-core';
 import ffmpeg from 'fluent-ffmpeg';
 import dotenv from 'dotenv';
 import { path as ffmpegPath } from '@ffmpeg-installer/ffmpeg';
 import { createWriteStream } from 'fs';
-import { dirname, join } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import { v4 } from 'uuid';
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 ffmpeg.setFfmpegPath(ffmpegPath);
 
 dotenv.config();

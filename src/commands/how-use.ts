@@ -1,4 +1,4 @@
-import { SendMessage } from '@/types/socket-type';
+import { SendMessage } from '../types/socket-type';
 
 export const sendCommandsResponse = async (
   chatId: string,
