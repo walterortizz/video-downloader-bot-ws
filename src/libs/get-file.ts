@@ -15,7 +15,7 @@ const agent = ytdl.createAgent(cookies);
 export const getVideoFile = async (url: string) => {
   try {
     const id = v4();
-    const output = join(__dirname, '../../', 'tmp/video', `${id}.mp4`);
+    const output = join(__dirname, '../../..', 'tmp/video', `${id}.mp4`);
     const videoInfoPromise = ytdl.getInfo(url, { agent });
     const videoPath: string = await new Promise((resolve, reject) => {
       ytdl(url, { agent, filter: 'audioandvideo', quality: 'lowest' })
@@ -44,7 +44,7 @@ export const getVideoFile = async (url: string) => {
 export const getAudioFile = async (url: string) => {
   try {
     const id = v4();
-    const output = join(__dirname, '../../', 'tmp/audio', `${id}.mp3`);
+    const output = join(__dirname, '../../..', 'tmp/audio', `${id}.mp3`);
     const audioPath: string = await new Promise((resolve, reject) => {
       const stream = ytdl(url, {
         agent,
