@@ -8,9 +8,10 @@ export const sendVideoResponse = async (
   sendMessage: SendMessage,
   videoId?: string
 ) => {
-  if (!videoId || !messageKey.remoteJid) return undefined;
+  const userId = messageKey.remoteJid;
+  if (!videoId || !userId) return undefined;
 
-  sendMessage(messageKey.remoteJid, {
+  sendMessage(userId, {
     react: {
       text: '⌛',
       key: messageKey,
@@ -22,7 +23,7 @@ export const sendVideoResponse = async (
 
   try {
     if (!videoPath) throw new Error('video url not found');
-    await sendMessage(messageKey.remoteJid, {
+    await sendMessage(userId, {
       video: {
         url: videoPath,
       },
@@ -33,14 +34,14 @@ export const sendVideoResponse = async (
 ◉ *Duración*: ${duration} \n
 `,
     });
-    sendMessage(messageKey.remoteJid, {
+    sendMessage(userId, {
       react: {
         text: '✅',
         key: messageKey,
       },
     });
   } catch (error) {
-    sendMessage(messageKey.remoteJid, {
+    sendMessage(userId, {
       react: {
         text: '❌',
         key: messageKey,

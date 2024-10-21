@@ -4,7 +4,7 @@ import { formatNumberWithDots, formatTime } from '../utils/index';
 
 export const searchVideoAndResponse = async (
   query: string,
-  chatId: string,
+  userId: string,
   sendMessage: SendMessage
 ) => {
   try {
@@ -12,11 +12,11 @@ export const searchVideoAndResponse = async (
     const res = await ytSearch(query);
     const [video] = res.videos;
     if (!video)
-      return await sendMessage(chatId, {
+      return await sendMessage(userId, {
         text: 'No se ha encontrado ningún vídeo.',
       });
     else
-      return await sendMessage(chatId, {
+      return await sendMessage(userId, {
         image: {
           url: video.image,
         },

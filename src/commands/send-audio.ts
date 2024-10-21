@@ -8,9 +8,10 @@ export const sendAudioResponse = async (
   sendMessage: SendMessage,
   videoId?: string
 ) => {
-  if (!videoId || !messageKey.remoteJid) return undefined;
+  const userId = messageKey.remoteJid;
+  if (!videoId || !userId) return undefined;
 
-  sendMessage(messageKey.remoteJid, {
+  sendMessage(userId, {
     react: {
       text: '⌛',
       key: messageKey,
@@ -22,21 +23,21 @@ export const sendAudioResponse = async (
 
   try {
     if (!audioPath) throw new Error('audio path not found');
-    await sendMessage(messageKey.remoteJid, {
+    await sendMessage(userId, {
       audio: {
         url: audioPath as string,
       },
       mimetype: 'audio/mpeg',
       fileName: `${videoId}.mp3`,
     });
-    sendMessage(messageKey.remoteJid, {
+    sendMessage(userId, {
       react: {
         text: '✅',
         key: messageKey,
       },
     });
   } catch (error) {
-    sendMessage(messageKey.remoteJid, {
+    sendMessage(userId, {
       react: {
         text: '❌',
         key: messageKey,

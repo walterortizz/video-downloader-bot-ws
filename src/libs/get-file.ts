@@ -15,13 +15,13 @@ const agent = ytdl.createAgent(cookies);
 export const getVideoFile = async (url: string) => {
   try {
     const id = v4();
-    const output = join(__dirname, '../../..', 'tmp/video', `${id}.mp4`);
+    const output = join(__dirname, '../..', 'tmp/video', `${id}.mp4`);
     const videoInfoPromise = ytdl.getInfo(url, { agent });
     const videoPath: string = await new Promise((resolve, reject) => {
       ytdl(url, { agent, filter: 'audioandvideo', quality: 'lowest' })
         .pipe(createWriteStream(output))
         .on('close', () => resolve(output))
-        .on('error', () => reject(undefined));
+        .on('error', (err) => reject(err));
     });
 
     const videoInfo = await videoInfoPromise;
@@ -33,6 +33,7 @@ export const getVideoFile = async (url: string) => {
       ),
     };
   } catch (error) {
+    console.log(error);
     return {
       videoPath: undefined,
       title: undefined,
@@ -44,7 +45,7 @@ export const getVideoFile = async (url: string) => {
 export const getAudioFile = async (url: string) => {
   try {
     const id = v4();
-    const output = join(__dirname, '../../..', 'tmp/audio', `${id}.mp3`);
+    const output = join(__dirname, '../..', 'tmp/audio', `${id}.mp3`);
     const audioPath: string = await new Promise((resolve, reject) => {
       const stream = ytdl(url, {
         agent,
@@ -58,11 +59,13 @@ export const getAudioFile = async (url: string) => {
         .on('error', (err) => reject(err))
         .pipe(createWriteStream(output))
         .on('close', () => resolve(output))
-        .on('error', () => reject(undefined));
+        .on('error', (err) => reject(err));
     });
 
     return audioPath;
   } catch (error) {
+    console.log(error);
+
     return undefined;
   }
 };

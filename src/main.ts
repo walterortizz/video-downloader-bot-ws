@@ -59,16 +59,13 @@ const startSock = async () => {
       processedMessages.add(chat.key.id);
 
       const message = chat.message;
+      const userId = chat.key?.remoteJid || '';
 
       if (message?.conversation?.startsWith('.info')) {
-        await sendCommandsResponse(chat.key?.remoteJid ?? '', sock.sendMessage);
+        await sendCommandsResponse(userId, sock.sendMessage);
       } else if (message?.conversation?.startsWith('.search')) {
         const query = message.conversation.split('.search')[1];
-        await searchVideoAndResponse(
-          query,
-          chat.key?.remoteJid ?? '',
-          sock.sendMessage
-        );
+        await searchVideoAndResponse(query, userId, sock.sendMessage);
       } else if (message?.extendedTextMessage?.text?.startsWith('video')) {
         const caption =
           message.extendedTextMessage.contextInfo?.quotedMessage?.imageMessage
